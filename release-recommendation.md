@@ -1,0 +1,5 @@
+# Release Recommendation
+
+**Verdict: DO NOT RELEASE**
+
+While the application meets the absolute latency thresholds (§11.1) and handles 50 concurrent users without errors, the build is unfit for release due to critical backend vulnerabilities, most notably the **Client-Side Price Tampering (IDOR)** on the `/api/cart` endpoint (violating NFR-S §11.8). Although the UI contains functional bugs (e.g., the SAVE10 coupon cap failure) and performance degrades disproportionately (§11.2), the pricing manipulation vulnerability alone dictates a strict "no-go" decision. Allowing a user to intercept and alter the `price` parameter to purchase items for free—or with negative balances—represents a catastrophic financial and security risk that entirely undermines the store's integrity. No e-commerce platform can safely go live while trusting the client to dictate the authoritative price of its inventory.
